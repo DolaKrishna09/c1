@@ -30,6 +30,10 @@ public class CourseService {
 	}
 	
 	
+	public Optional<Courses> getCourseByCourseId(int courseId) {
+		return repository.findById(courseId);
+	}
+	
 	public List<Object[]> fetchJavaDetails() {
 		return repository.fetchJavaDetails();
 	}
@@ -40,29 +44,32 @@ public class CourseService {
 		return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<String> updateCourse(Courses updatedCourse) {
 
-		Optional<Courses> existingCourse = repository.findById(updatedCourse.getCourse_id());
+	// Service method
+	public ResponseEntity<String> updateCourse(int courseId, Courses updatedCourse) {
+	    Optional<Courses> existingCourse = repository.findById(courseId);
 
-		if (existingCourse.isPresent()) {
+	    if (existingCourse.isPresent()) {
+	        Courses courseToUpdate = existingCourse.get();
+	        courseToUpdate.setCourseName(updatedCourse.getCourseName());
+	        courseToUpdate.setCourseDuration(updatedCourse.getCourseDuration());
+	        courseToUpdate.setStartDate(updatedCourse.getStartDate());
+	        courseToUpdate.setEndDate(updatedCourse.getEndDate());
+	        courseToUpdate.setAvailability(updatedCourse.getAvailability());
+	        courseToUpdate.setDetails(updatedCourse.getDetails());
 
-			Courses courseToUpdate = existingCourse.get();
-			courseToUpdate.setCourse_name(updatedCourse.getCourse_name());
-			courseToUpdate.setCourse_duration(updatedCourse.getCourse_duration());
-			courseToUpdate.setStart_date(updatedCourse.getStart_date());
-			courseToUpdate.setEnd_date(updatedCourse.getEnd_date());
-			courseToUpdate.setAvailability(updatedCourse.getAvailability());
-			courseToUpdate.setDetails(updatedCourse.getDetails());
-			courseToUpdate.setCourse_prerequisites(updatedCourse.getCourse_prerequisites());
-			courseToUpdate.setCourse_outcome(updatedCourse.getCourse_outcome());
-
-			repository.save(courseToUpdate);
-			return new ResponseEntity<>("Course updated successfully", HttpStatus.OK);
-		} else {
-
-			return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
-		}
+	        try {
+	            repository.save(courseToUpdate);
+	            return new ResponseEntity<>("Course updated successfully", HttpStatus.NO_CONTENT);
+	        } catch (Exception e) {
+	            // Handle the exception, e.g., log it
+	            return new ResponseEntity<>("Failed to update course", HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    } else {
+	        return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
+	    }
 	}
+
 
 	public ResponseEntity<String> deleteCourse(int courseId) {
 

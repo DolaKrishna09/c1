@@ -11,112 +11,90 @@ import jakarta.persistence.Table;
 @Table(name = "Courses")
 public class Courses {
 	@Id
-	@Column(name = "COURSE_ID")
+	
+	@Column(name="course_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Course_id;
+	private int courseId;
 
 	@Column(name = "COURSE_NAME")
-	private String Course_name;
+	private String courseName;
 
 	@Column(name = "COURSE_DURATION")
-	private String Course_duration;
+	private String courseDuration;
 
 	@Column(name = "START_DATE")
-	private String Start_date;
+	private String startDate;
 
 	@Column(name = "END_DATE")
-	private String End_date;
-
-	@Column(name = "COURSE_PREREQUISITES")
-	private String Course_prerequisites;
-
-	@Column(name = "COURSE_OUTCOME")
-	private String Course_outcome;
+	private String endDate;
 
 	@Column(name = "AVAILABILITY")
-	private String Availability;
+	private String availability;
 	
 	@Column(name="DETAILS")
-	private String Details;
+	private String details;
 
-	public int getCourse_id() {
-		return Course_id;
+	public int getCourseId() {
+		return courseId;
 	}
 
-	public void setCourse_id(int course_id) {
-		Course_id = course_id;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
-	public String getCourse_name() {
-		return Course_name;
+	public String getCourseName() {
+		return courseName;
 	}
 
-	public void setCourse_name(String course_name) {
-		Course_name = course_name;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
-	public String getCourse_duration() {
-		return Course_duration;
+	public String getCourseDuration() {
+		return courseDuration;
 	}
 
-	public void setCourse_duration(String course_duration) {
-		Course_duration = course_duration;
+	public void setCourseDuration(String courseDuration) {
+		this.courseDuration = courseDuration;
 	}
 
-	public String getStart_date() {
-		return Start_date;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStart_date(String start_date) {
-		Start_date = start_date;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public String getEnd_date() {
-		return End_date;
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public void setEnd_date(String end_date) {
-		End_date = end_date;
-	}
-
-	public String getCourse_prerequisites() {
-		return Course_prerequisites;
-	}
-
-	public void setCourse_prerequisites(String course_prerequisites) {
-		Course_prerequisites = course_prerequisites;
-	}
-
-	public String getCourse_outcome() {
-		return Course_outcome;
-	}
-
-	public void setCourse_outcome(String course_outcome) {
-		Course_outcome = course_outcome;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getAvailability() {
-		return Availability;
+		return availability;
 	}
 
 	public void setAvailability(String availability) {
-		Availability = availability;
+		this.availability = availability;
 	}
 
 	public String getDetails() {
-		return Details;
+		return details;
 	}
 
 	public void setDetails(String details) {
-		Details = details;
+		this.details = details;
 	}
 
 	@Override
 	public String toString() {
-		return "Courses [Course_id=" + Course_id + ", Course_name=" + Course_name + ", Course_duration="
-				+ Course_duration + ", Start_date=" + Start_date + ", End_date=" + End_date + ", Course_prerequisites="
-				+ Course_prerequisites + ", Course_outcome=" + Course_outcome + ", Availability=" + Availability
-				+ ", Details=" + Details + "]";
+		return "Courses [courseId=" + courseId + ", courseName=" + courseName + ", courseDuration=" + courseDuration
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", availability=" + availability + ", details="
+				+ details + "]";
 	}
 
 }

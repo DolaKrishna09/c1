@@ -80,12 +80,13 @@ public class AdminController {
 	public List<Object[]> allCoursesWithoutId() {
 		return courseService.getAllCoursesWithoutId();
 	}
-
-	// UPDATE COURSE
-	@PutMapping("/updateCourse")
-	public ResponseEntity<String> updateCourse(@RequestBody Courses updatedCourse) {
-		return courseService.updateCourse(updatedCourse);
+	
+	@PutMapping("/updateCourse/{courseId}")
+	public ResponseEntity<String> updateCourse(@PathVariable int courseId, @RequestBody Courses updatedCourse) {
+	    return courseService.updateCourse(courseId, updatedCourse);
 	}
+	
+	
 
 	// DELETE COURSE ACCORDING TO ID
 	@DeleteMapping("/deleteCourse/{courseId}")
@@ -93,6 +94,8 @@ public class AdminController {
 		return courseService.deleteCourse(courseId);
 	}
 
+	
+	
 	// -----------------------------------------------------------------//
 
 	// FOR ADDING STUDENT_DETAILS

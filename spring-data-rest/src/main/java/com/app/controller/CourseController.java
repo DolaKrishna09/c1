@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,12 @@ public class CourseController {
 	@GetMapping("/SearchByCoursename/{coursename}")
 	public List<Object[]> getCoursesByCourseName(@PathVariable String coursename) {
 		return courseservice.getCourseByCourseName(coursename);
+	}
+	
+
+	@GetMapping("/SearchByCourseId/{courseId}")
+	public Optional<Courses> getCoursesByCourseName(@PathVariable int courseId) {
+		return courseservice.getCourseByCourseId(courseId);
 	}
 	
 
