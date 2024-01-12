@@ -68,6 +68,11 @@ public class AdminController {
 	public ResponseEntity<String> addCourse(@RequestBody Courses course) {
 		return courseService.addCourse(course);
 	}
+	
+	 @PostMapping("/addCourse/{courseId}")
+	    public ResponseEntity<String> addCourse(@PathVariable int courseId, @RequestBody Courses course) {
+	        return courseService.addCourseWithId(courseId, course);
+	    }
 
 	// FETCHING COURSES WITH ID
 	@GetMapping("/allCoursesWithId")
@@ -98,29 +103,29 @@ public class AdminController {
 	
 	// -----------------------------------------------------------------//
 
-	// FOR ADDING STUDENT_DETAILS
-	@PostMapping("/addStudentDetails")
-	public ResponseEntity<String> addStudentDetails(@RequestBody StudentsDetails studentDetails) {
-		return studentsDetailsService.addStudentsDetails(studentDetails);
-	}
-
-	// COURSE BOUGHT STUDENTS
-	@GetMapping("/allStudentsDetails")
-	public List<StudentsDetails> getAllStudentsDetails() {
-		return studentsDetailsService.allStudentsDetails();
-	}
-
-	// UPDATE STUDENT DETAILS
-	@PutMapping("/updateStudentDetails")
-	public ResponseEntity<String> updateStudentDetails(@RequestBody StudentsDetails studentDetails) {
-		return studentsDetailsService.updateStudentsDetails(studentDetails);
-	}
-
-	// DELETE STUDENT DETAILS ACCORDING TO ID
-	@DeleteMapping("/deleteStudentDetails/{studentId}")
-	public ResponseEntity<String> deleteStudentDetails(@PathVariable int studentId) {
-		return studentsDetailsService.deleteStudentDetails(studentId);
-	}
+//	// FOR ADDING STUDENT_DETAILS
+//	@PostMapping("/addStudentDetails")
+//	public ResponseEntity<String> addStudentDetails(@RequestBody StudentsDetails studentDetails) {
+//		return studentsDetailsService.addStudentsDetails(studentDetails);
+//	}
+//
+//	// COURSE BOUGHT STUDENTS
+//	@GetMapping("/allStudentsDetails")
+//	public List<StudentsDetails> getAllStudentsDetails() {
+//		return studentsDetailsService.allStudentsDetails();
+//	}
+//
+//	// UPDATE STUDENT DETAILS
+//	@PutMapping("/updateStudentDetails")
+//	public ResponseEntity<String> updateStudentDetails(@RequestBody StudentsDetails studentDetails) {
+//		return studentsDetailsService.updateStudentsDetails(studentDetails);
+//	}
+//
+//	// DELETE STUDENT DETAILS ACCORDING TO ID
+//	@DeleteMapping("/deleteStudentDetails/{studentId}")
+//	public ResponseEntity<String> deleteStudentDetails(@PathVariable int studentId) {
+//		return studentsDetailsService.deleteStudentDetails(studentId);
+//	}
 
 	// ---------------------------------------------------------------------------//
 

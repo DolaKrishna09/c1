@@ -42,10 +42,10 @@ public class FacultyController {
 
 	};
 
-	@PutMapping("/updateCourse")
-	public ResponseEntity<String> updateCourse(@RequestBody Courses updatedCourse) {
-		return courseService.updateCourse(updatedCourse);
-	}
+//	@PutMapping("/updateCourse")
+//	public ResponseEntity<String> updateCourse(@RequestBody Courses updatedCourse) {
+//		return courseService.updateCourse(updatedCourse);
+//	}
 
 	@DeleteMapping("/deleteCourse/{courseId}")
 	public ResponseEntity<String> deleteCourse(@PathVariable int courseId) {

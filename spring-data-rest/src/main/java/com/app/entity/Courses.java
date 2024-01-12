@@ -11,9 +11,8 @@ import jakarta.persistence.Table;
 @Table(name = "Courses")
 public class Courses {
 	@Id
-	
 	@Column(name="course_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int courseId;
 
 	@Column(name = "COURSE_NAME")

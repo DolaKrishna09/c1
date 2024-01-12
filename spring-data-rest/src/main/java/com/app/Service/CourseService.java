@@ -43,6 +43,13 @@ public class CourseService {
 		repository.save(course);
 		return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
 	}
+	
+
+    public ResponseEntity<String> addCourseWithId(int courseId, Courses course) {
+        course.setCourseId(courseId);
+        repository.save(course);
+        return new ResponseEntity<>("Course added successfully with ID: " + courseId, HttpStatus.CREATED);
+    }
 
 
 	// Service method

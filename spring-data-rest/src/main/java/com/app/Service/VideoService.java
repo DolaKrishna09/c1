@@ -44,9 +44,16 @@ public class VideoService implements VideoInterface {
 	}
 
 	@Override
-	public Video deleteVideos(Integer Id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Video deleteVideos(Integer id) {
+	    Optional<Video> optionalVideo = videorepository.findById(id);
+
+	    if (optionalVideo.isPresent()) {
+	        Video video = optionalVideo.get();
+	        videorepository.delete(video);
+	        return video;
+	    } else {
+	        throw new ResourseNotFoundException(false, "Video id not found");
+	    }
 	}
 
 }

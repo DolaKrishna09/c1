@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Modules {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "MODULE_ID")
     private int moduleId;
 
@@ -85,3 +85,6 @@ public class Modules {
     
 
 }
+
+
+

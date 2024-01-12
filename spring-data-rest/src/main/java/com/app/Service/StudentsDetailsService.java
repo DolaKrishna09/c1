@@ -1,61 +1,43 @@
 package com.app.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import com.app.dao.StudentsDetailsRepository;
 import com.app.entity.StudentsDetails;
+
 
 @Service
 public class StudentsDetailsService {
 
     @Autowired
     private StudentsDetailsRepository studentsDetailsRepository;
+    
+    public List<Map<String, Object>> getStudentCourses(int studentId) {
+        List<Object[]> result = studentsDetailsRepository.studentCourse(studentId);
+        List<Map<String, Object>> studentCourses = new ArrayList<>();
 
-    public List<StudentsDetails> allStudentsDetails() {
-        return studentsDetailsRepository.findAll();
-    }
+        for (Object[] row : result) {
+            Map<String, Object> courseMap = new HashMap<>();
+            courseMap.put("studentName", row[0]);
+            courseMap.put("courseName", row[1]);
+            courseMap.put("courseId", row[2]);  // This is where the exception is thrown
 
-
-    public ResponseEntity<String> addStudentsDetails(StudentsDetails studentsDetails) {
-        studentsDetailsRepository.save(studentsDetails);
-        return new ResponseEntity<>("StudentDetails added successfully", HttpStatus.CREATED);
-    }
-
-    public ResponseEntity<String> updateStudentsDetails(StudentsDetails studentsDetails) {
-        Optional<StudentsDetails> existingStudent = studentsDetailsRepository.findById(studentsDetails.getSNo());
-
-        if (existingStudent.isPresent()) {
-            StudentsDetails studentToUpdate = existingStudent.get();
-            studentToUpdate.setStudentId(studentsDetails.getStudentId());
-            studentToUpdate.setStudentName(studentsDetails.getStudentName());
-            studentToUpdate.setCourses(studentsDetails.getCourses());
-
-            studentsDetailsRepository.save(studentToUpdate);
-            return new ResponseEntity<>("Student Details updated successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Student Details not found", HttpStatus.NOT_FOUND);
+            studentCourses.add(courseMap);
         }
+
+        return studentCourses;
+    }
+    
+    public List<StudentsDetails> getAllStudentDetails(){
+    	return studentsDetailsRepository.findAll();
     }
 
-    public ResponseEntity<String> deleteStudentDetails(int studentId) {
-        Optional<StudentsDetails> existingStudent = studentsDetailsRepository.findById(studentId);
-
-        if (existingStudent.isPresent()) {
-            try {
-                studentsDetailsRepository.deleteById(studentId);
-                return new ResponseEntity<>("Student deleted successfully", HttpStatus.OK);
-            } catch (Exception e) {
-             
-                return new ResponseEntity<>("Error deleting student", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        } else {
-            return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
-        }
-    }
 }
